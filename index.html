@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sweatha | Web Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+        emailjs.init("sP0Kv-A-adnzyWuMO"); 
+    })();
+  </script>
   <style>
     /* Reset & base */
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -282,21 +288,17 @@
   }, appearOptions);
   faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-  function sendMessage(event) {
-    event.preventDefault(); // prevent form from reloading page
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-
-    const mailtoLink = `mailto:psweatha91710@gmail.com?subject=Message from ${name}&body=${encodeURIComponent(message + "\n\nFrom: " + name + " (" + email + ")")}`;
-
-    window.location.href = mailtoLink;
-    
-    // Optional: reset form
-    document.getElementById('contact-form').reset();
-  }
+  
    
+  </script>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        emailjs.sendForm('service_179cjvo', 'template_9i9ks6h', this)
+        .then(() => alert('✅ Message sent successfully!'))
+        .catch(error => alert('❌ Failed: ' + JSON.stringify(error)));
+    });
   </script>
 
 </body>
